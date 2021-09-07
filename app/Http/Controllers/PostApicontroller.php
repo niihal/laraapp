@@ -94,7 +94,21 @@ class PostApicontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = PostApi::find($id);
+        
+        if(!empty($post)){
+            $post->update($request->all());
+            $response = [
+                'post' => $post,
+                'code' => '201'
+            ];
+        }else{
+            $response = [
+                'meesage' => "No Post Found with Associated Id",
+                'code' => '500'
+            ];
+        }
+        return response($response,$response['code']);
     }
 
     /**
@@ -105,6 +119,20 @@ class PostApicontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = PostApi::find($id);
+        
+        if(!empty($post)){
+            $post = PostApi::destroy($id);
+            $response = [
+                'message' => isset($post) ? "Deleted Post Successfully" : "Error",
+                'code' => '201'
+            ];
+        }else{
+            $response = [
+                'meesage' => "No Post Found with Associated Id",
+                'code' => '500'
+            ];
+        }
+        return response($response,$response['code']);
     }
 }

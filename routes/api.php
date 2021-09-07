@@ -36,6 +36,8 @@ Route::post('user/login',[UserApiController::class,'login']);
 Route::group(['middleware' => ['auth:sanctum']], function(){
     //book register routes
     Route::post('/register',[PostApicontroller::class,'store']);
+    Route::put('/update/{id}',[PostApicontroller::class,'update']);
+    Route::delete('/delete/{id}',[PostApicontroller::class,'destroy']);
     
     //user routes
     Route::post('user/logout',[UserApiController::class,'logout']);
